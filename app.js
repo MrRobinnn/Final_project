@@ -1,25 +1,25 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var Blog = require('./models/blog');
-var Comment = require("./models/comment");
-var User = require("./models/user");
-var methodOverride = require('method-override');
- 
-var PORT = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const Blog = require('./models/blog');
+const Comment = require("./models/comment");
+const User = require("./models/user");
+const methodOverride = require('method-override');
+
+const PORT = process.env.PORT || 3000;
 
 //==========db config==============
-var uri = 'mongodb://localhost:27017/zfinalproject';
+const uri = 'mongodb://localhost:27017/zfinalproject';
 
 mongoose.connect(uri, { useNewUrlParser: true });
 // var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
 // db.once('open', function() {
 //  console.log("done!");
- 
+
 // });
 
 
@@ -34,7 +34,7 @@ app.use(express.static(__dirname + "/public"));
 
 //Passport configuration
 app.use(require("express-session")({
-	secret: "I love you!",
+	secret: "who to kill some one ",
 	resave: true,
 	saveUninitialized: false
 }));
@@ -58,21 +58,17 @@ app.use(function(req, res, next){
 	next();
 });
 
-// app.use(function(req, res, next){
-// 	res.locals.admin = req.user;
-// 	next();
-// });
+
 
 // //======================RESTFUL ROUTES====================================
 app.get("/", function(req, res){
-	// res.send("This is the blog page!");
 	res.redirect("/blogs");
 });
 
 //===== INDEX ROUTE
 app.get("/blogs", function(req, res){
 	console.log(req.header);
-	
+
 	Blog.find({}, function(err, blogs){
 		if(err){
 			console.log("ERROR!");
@@ -84,7 +80,7 @@ app.get("/blogs", function(req, res){
 
 //===== NEW ROUTE
 app.get("/blogs/new", isLoggedIn, function(req, res){
-;
+
 
 
 	res.render("blogs/new");
@@ -94,7 +90,7 @@ app.get("/blogs/new", isLoggedIn, function(req, res){
 app.post("/blogs", isLoggedIn, function(req, res){
 	//create blog
 
-	
+
 
 	let data = req.body.blog
 	Blog.create(data, function(err, newBlog){
@@ -139,7 +135,7 @@ app.get("/editprofile", isLoggedIn, function(req, res){
 	User.findById(req.user._id, function(err, foundUser){
 		if(err){
 			console.log("nashod!");
-			
+
 		} else {
 			res.render("editprofile", {userInfo: foundUser});
 			// console.log("founduser!"+foundUser);
@@ -162,7 +158,7 @@ app.put("/editprofile", isLoggedIn, function(req, res){
 	// User.findOneAndDelete({ username: req.session.passport.user }, function(err, result){
 	// 	if(err){
 	// 		console.log("pak nashod!");
-			
+
 	// 		// res.redirect("/blogs");
 	// 	} else {
 	// 		console.log("pak shod!");
@@ -171,14 +167,14 @@ app.put("/editprofile", isLoggedIn, function(req, res){
 	User.findOneAndUpdate({ username: req.session.passport.user }, {$set:req.body}, function(err, result){
 		if(err){
 			console.log("bazam nashod!");
-			
+
 			// res.redirect("/blogs");
 		} else {
 			console.log("RESULT: " + result);
 			res.redirect("/login" );
-		
+
 			// console.log(req.user._id);
-			
+
 		}
 	});
 });
@@ -209,16 +205,16 @@ app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
 
 //===== UPDATE ROUTE
 app.put("/blogs/:id", isLoggedIn, function(req, res){
-	
+
 	let id = req.params.id;
 	Blog.findByIdAndUpdate(id, req.body.blog, function(err, updatedBlog){
 		if(err){
 			res.redirect("/blogs");
 		} else {
 			res.redirect("/blogs/" + id);
-		
+
 			console.log(req.params.id);
-			
+
 		}
 	});
 });
@@ -295,8 +291,8 @@ app.post("/register", function(req, res){
         lastname:req.body.lastname,
         gender:req.body.gender,
         phone:req.body.phone
-    
-    
+
+
     });
 	console.log("This is the username:" + newUser);
 	User.register(newUser, req.body.password, function(err, user){
@@ -315,7 +311,7 @@ app.get("/login", function(req, res){
 	res.render("login");
 });
 //handle login logic
-app.post("/login", passport.authenticate("local", 
+app.post("/login", passport.authenticate("local",
 	{
 		successRedirect: "/blogs",
 		failureRedirect: "/login"
