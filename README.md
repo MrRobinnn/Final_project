@@ -1,7 +1,9 @@
 # Final_project
-web log
-
-npm isntall
 
 
-npm start ot npm test
+web log with ejs 
+
+npm install
+
+
+npm start or npm test
