@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<div class= "ui main text container segment">
+	<div class="ui huge header">Add New Comment to <em><%= blogComt.title %></em></div>
+	<form class="ui form" action="/blogs/<%= blogComt._id %>/comments" method="POST">
+		<div class="field">
+			<input type="text" name="comment[text]" placeholder="text">
+		</div>
+		<input class="large ui teal basic button" type="Submit">
+		<button href="/blogs" class="large ui teal basic right floated button">Go Back</button>
+	</form>
+		
+</div>
+
+<% include ../partials/footer %>

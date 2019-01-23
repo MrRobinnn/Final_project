@@ -1,0 +1,56 @@
+<% include ./partials/header %>
+<script>$('select.dropdown')
+	.dropdown()
+  ;</script>
+<div class= "ui main text container login">
+	<div class="ui huge header">Sign Up</div>
+	<form class="lg-form" action="/editprofile?_method=PUT" method="POST">
+		<div class="field user-field">
+			<div class="ui large left icon input">
+	  			<input type="text" name="username"  value="<%= userInfo.username %>">
+	  			<i class="users icon"></i>
+			</div>
+		</div>
+
+		<div class="field user-field">
+			<div class="ui large left icon input">
+	  			<input type="text" name="name" value="<%= userInfo.name %>">
+	  			<i class="users icon"></i>
+			</div>
+		</div>
+		<div class="field user-field">
+			<div class="ui large left icon input">
+	  			<input type="text" name="lastname" value="<%= userInfo.lastname %>">
+	  			<i class="users icon"></i>
+			</div>
+		</div>
+
+		<div class="field user-field">
+			<div class="ui large left icon input">
+	  			<input type="tel" name="phone" value="<%= userInfo.phone %>">
+	  			<i class="users icon"></i>
+			</div>
+		</div>
+
+		<div class="field pass-field">
+			<div class="ui large left icon input">
+	  			<input type="password" name="password" value="<%= userInfo.password %>">
+	  			<i class="barcode icon"></i>
+			</div>
+		</div>
+
+		<div class="field user-field  ">
+				<select name="gender" class="ui dropdown" id="select">
+					<option value="">Gender</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				  </select>
+				</div>
+
+		<div class="log-button">
+		<input class="large ui teal basic button" type="submit" value="editprofile">
+	    </div>
+	</form>
+</div>
+
+<% include ./partials/footer %>

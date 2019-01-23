@@ -1,0 +1,52 @@
+<% include ../partials/header %>
+<div class="ui main container">
+	<div class="ui equal width grid">
+		<div class="row">
+			<div class="column">
+			    <div class="ui segment">
+						<div class="ui huge header"><%= blogInfo.title %></div>
+						<div class="item">
+							<img class="ui centered rounded image" src="<%= blogInfo.image %>">
+							<div class="content">
+								<span><%= blogInfo.created.toDateString() %></span>
+							</div>
+							<div class="description">
+								<p><%- blogInfo.body %></p>
+							</div>
+							<% if(!currentUser){ %>
+							<% } else { %>
+							<a class="large ui teal basic button" href="/blogs/<%= blogInfo._id %>/edit">Edit</a>
+							<form id="delete" action="/blogs/<%= blogInfo._id %>?_method=DELETE"method="POST">
+								<button class="large ui red basic button">Delete</button>
+							</form>
+							<% }; %>
+						</div>	
+				</div>
+			</div>
+		</div>
+		<div class="row">	
+		  <div class="column">
+		    <div class="ui segment">
+					<a class="small ui teal right floated button" href="/blogs/<%= blogInfo._id %>/comments/new">Add New Comment</a>
+					<div class="ui divided items">
+						<% blogInfo.comments.forEach(function(comment){ %>
+							<div class="item">
+						    	<div class="content">
+							    	<a class="header"><%= comment.author.username %></a>
+								    	<div class="meta">
+							      			<span class="cinema">Sept 14</span>
+							    		</div>
+								    	<div class="description">
+								        	<p><%= comment.text %></p>
+										</div>
+								</div>
+							</div>
+					 	<% }); %>
+					</div>
+		    	</div>
+	  		</div>
+	  	</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

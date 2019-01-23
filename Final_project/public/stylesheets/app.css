@@ -1,0 +1,39 @@
+i.cloud {
+	font-size: 2em;
+}
+
+.container.main {
+	margin-top: 7.0em;
+}
+
+#delete {
+	display: inline;
+}
+
+#hover-color:hover {
+	color: #008080;
+}
+
+
+.login{
+	text-align: center;
+}
+
+.lg-form{
+	margin: 5px;
+	padding: 5px;
+}
+
+.pass-field{
+	padding: 5px;
+}
+
+.user-field{
+	padding: 5px;
+}
+
+.log-button{
+	padding: 10px;
+}
+
+
